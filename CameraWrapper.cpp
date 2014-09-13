@@ -95,6 +95,38 @@ static char * camera_fixup_getparams(int id, const char * settings)
     android::CameraParameters params;
     params.unflatten(android::String8(settings));
 
+#ifdef QCOM_LEGACY_CAM_PARAMS
+    params.set(android::CameraParameters::CAF_OFF, "caf-off");
+    params.set(android::CameraParameters::CAF_ON, "caf-on");
+    params.set(android::CameraParameters::CAPTURE_MODE_NORMAL, "normal");
+    params.set(android::CameraParameters::CAPTURE_MODE_BURST, "burst");
+    params.set(android::CameraParameters::CAPTURE_MODE_CONTI_BURST, "contiburst");
+    params.set(android::CameraParameters::CAPTURE_MODE_HDR, "hdr");
+    params.set(android::CameraParameters::CAPTURE_MODE_HJR, "hjr");
+    params.set(android::CameraParameters::CONTINUOUS_AF_OFF, "caf-off");
+    params.set(android::CameraParameters::CAPTURE_MODE_PANORAMA, "panorama");
+    params.set(android::CameraParameters::CONTINUOUS_AF_ON, "caf-on");
+    params.set(android::CameraParameters::FOCUS_MODE_CONTINUOUS_CAMERA, "continuous-camera");
+    params.set(android::CameraParameters::KEY_CONTINUOUS_AF, "continuous-af");
+    params.set(android::CameraParameters::KEY_CAF, "continuous-af");
+    params.set(android::CameraParameters::KEY_CAPTURE_MODE, "capture-mode");
+    params.set(android::CameraParameters::KEY_PICTURE_COUNT, "picture-count");
+    params.set(android::CameraParameters::KEY_MAX_BURST_PICTURE_COUNT, "max-burst-picture-count");
+    params.set(android::CameraParameters::KEY_SUPPORTED_CONTINUOUS_AF, "continuous-af-mode");
+    params.set(android::CameraParameters::KEY_SUPPORTED_CAF, "continuous-af-values");
+    params.set(android::CameraParameters::KEY_SUPPORTED_CAPTURE_MODES, "capture-mode-values");
+    params.set(android::CameraParameters::KEY_TAKING_PICTURE_ZOOM, "taking-picture-zoom");
+    params.set(android::CameraParameters::KEY_PANORAMA_MODE, "panorama-mode");
+    params.set(android::CameraParameters::PANORAMA_MODE_NOT_INPROGRESS, "not-in-progress");
+    params.set(android::CameraParameters::PANORAMA_MODE_INPROGRESS, "in-progress");
+    params.set(android::CameraParameters::KEY_MAX_SHARPNESS, "sharpness-max");
+    params.set(android::CameraParameters::KEY_MIN_SHARPNESS, "sharpness-min");
+    params.set(android::CameraParameters::KEY_MAX_CONTRAST, "contrast-max");
+    params.set(android::CameraParameters::KEY_MIN_CONTRAST, "contrast-min");
+    params.set(android::CameraParameters::KEY_MAX_SATURATION, "saturation-max");
+    params.set(android::CameraParameters::KEY_MIN_SATURATION, "saturation-min");
+#endif
+
     // Some QCOM related framework changes expect max-saturation, max-contrast
     // and max-sharpness or the Camera app will crash.
     const char* value;
